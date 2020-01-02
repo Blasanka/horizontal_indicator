@@ -1,0 +1,19 @@
+name: horizontal_indicator
+description: Horizontal indicator that let you scroll horizontally and add anything.
+version: 0.0.1
+# author: Asanka B.L. (Blasanka)
+homepage: https://github.com/Blasanka/horizontal_indicator/
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  intl: ^0.16.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
