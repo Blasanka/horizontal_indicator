@@ -53,7 +53,7 @@ class DateIndicatorPage extends StatelessWidget {
 
 Screenshots:
 
-![Complete Page Flutter Date Indicator](/Screenshot_1.png?raw=true "Complete Page Flutter Date Indicator")
+![Complete Page Flutter Date Indicator](/Screenshot_2.png?raw=true "Complete Page Flutter Date Indicator")
 
 ![In a widget Flutter Date Indicator](/Screenshot_1.png?raw=true "In a Widget Flutter Date Indicator")
 
