@@ -32,8 +32,28 @@ class MyInheritedWidget extends InheritedWidget {
 }
 
 class DateIndicator extends StatefulWidget {
+  final Color holderColor;
+  final Color activeBubbleColor;
+  final Color textColor;
+  final Color numberColor;
+  final Color selectedBorderColor;
+  final Color unSelectedBorderColor;
+  final Color indicatorShadowColor;
+  final Color indicatorColor;
+
+  DateIndicator({
+    this.holderColor,
+    this.activeBubbleColor,
+    this.textColor,
+    this.numberColor,
+    this.selectedBorderColor,
+    this.unSelectedBorderColor,
+    this.indicatorShadowColor,
+    this.indicatorColor,
+  });
+
   static MyInheritedWidget of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType();
+      context.ancestorWidgetOfExactType(MyInheritedWidget);
 
   @override
   _DateIndicatorState createState() => _DateIndicatorState();
@@ -78,10 +98,10 @@ class _DateIndicatorState extends State<DateIndicator> {
       padding:
           const EdgeInsets.only(left: 7.0, right: 3.0, top: 2.0, bottom: 2.0),
       decoration: BoxDecoration(
-        color: Theme.of(context).secondaryHeaderColor,
+        color: widget.indicatorColor ?? Theme.of(context).secondaryHeaderColor,
         boxShadow: [
           BoxShadow(
-              color: Colors.blueAccent.withOpacity(.7),
+              color: widget.indicatorShadowColor ?? Colors.blueAccent.withOpacity(.7),
               offset: Offset(0.0, .5),
               blurRadius: 3.0,
               spreadRadius: 0.3),
@@ -99,25 +119,47 @@ class _DateIndicatorState extends State<DateIndicator> {
                 dayAvailabilityMap: dayAvailabilityMap,
                 toggleDateHolderActive: toggleDateHolderActive,
                 setSelectedDay: setSelectedDay,
-                child: DateHolder(index));
+                child: DateHolder(
+                  index,
+                  holderColor: widget.holderColor,
+                  activeColor: widget.activeBubbleColor,
+                  textColor: widget.textColor,
+                  numberColor: widget.numberColor,
+                  selectedBorderColor: widget.selectedBorderColor,
+                  unSelectedBorderColor: widget.unSelectedBorderColor,
+                ));
           }),
     );
   }
 }
 
 class DateHolder extends StatelessWidget {
-  DateHolder(this.index);
+  DateHolder(
+    this.index, {
+    this.holderColor,
+    this.activeColor,
+    this.textColor,
+    this.numberColor,
+    this.selectedBorderColor,
+    this.unSelectedBorderColor,
+  });
 
   final int index;
+  final Color holderColor;
+  final Color activeColor;
+  final Color textColor;
+  final Color numberColor;
+  final Color selectedBorderColor;
+  final Color unSelectedBorderColor;
 
-  final Widget activeBubble = Container(
-    width: 15.0,
-    height: 15.0,
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      color: Colors.deepOrangeAccent,
-    ),
-  );
+  Widget activeBubble() => Container(
+        width: 15.0,
+        height: 15.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: activeColor ?? Colors.deepOrangeAccent,
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +169,6 @@ class DateHolder extends StatelessWidget {
       onTap: () {
         appState.toggleDateHolderActive(true);
         appState.setSelectedDay(index);
-        print("Date ${index} selected!");
       },
       child: Stack(
         children: <Widget>[
@@ -138,7 +179,8 @@ class DateHolder extends StatelessWidget {
                   child: Text(
                     "${DateFormat('EEEE').format(DateTime(appState.date.year, appState.date.month, index)).substring(0, 1)}",
                     style: TextStyle(
-                        color: Theme.of(context).primaryColor, fontSize: 12.0),
+                        color: textColor ?? Theme.of(context).primaryColor,
+                        fontSize: 12.0),
                   )),
               Container(
                 width: 45.0,
@@ -146,12 +188,15 @@ class DateHolder extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 5.0),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.white,
+                  color: holderColor ?? Colors.white,
                   border: (index == (appState.selectedDay) &&
                           appState.isDateHolderActive == true)
                       ? Border.all(
-                          width: 2.0, color: Theme.of(context).primaryColor)
-                      : Border.all(color: Colors.transparent),
+                          width: 2.0,
+                          color: selectedBorderColor ??
+                              Theme.of(context).primaryColor)
+                      : Border.all(
+                          color: unSelectedBorderColor ?? Colors.transparent),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -159,7 +204,7 @@ class DateHolder extends StatelessWidget {
                     child: Text(
                       "${index + 1}", // to avoid showing zero
                       style: TextStyle(
-                          color: Theme.of(context).primaryColor,
+                          color: numberColor ?? Theme.of(context).primaryColor,
                           fontSize: 16.0),
                     ),
                   ),
@@ -168,7 +213,7 @@ class DateHolder extends StatelessWidget {
             ],
           ),
           (appState.dayAvailabilityMap[index] ?? false)
-              ? Positioned(right: 8.0, bottom: 5.0, child: activeBubble)
+              ? Positioned(right: 8.0, bottom: 5.0, child: activeBubble())
               : Container(),
         ],
       ),

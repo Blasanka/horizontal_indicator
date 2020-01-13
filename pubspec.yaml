@@ -1,7 +1,7 @@
 name: horizontal_indicator
 description: Horizontal indicator that let you scroll horizontally and add anything.
-version: 0.0.1
-# author: Asanka B.L. (Blasanka)
+version: 0.0.2
+author: Asanka B.L. (Blasanka) <blasanka95@gmail.com>
 homepage: https://github.com/Blasanka/horizontal_indicator/
 
 environment:

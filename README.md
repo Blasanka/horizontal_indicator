@@ -51,6 +51,9 @@ class DateIndicatorPage extends StatelessWidget {
 }
 ```
 
+Go to example directory to see demo app with how to change colors:
+https://github.com/Blasanka/horizontal_indicator/example
+
 Screenshots:
 
 ![Complete Page Flutter Date Indicator](/Screenshot_2.png?raw=true "Complete Page Flutter Date Indicator")
