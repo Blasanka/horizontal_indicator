@@ -50,6 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
             selectedBorderColor: Colors.red,
             indicatorColor: Colors.redAccent.withOpacity(.4),
             indicatorShadowColor: Colors.redAccent.withOpacity(.3),
+            onHolderTap: (int index) {
+              debugPrint(index.toString());
+              setState(() => _counter = index);
+            },
           ),
         ),
       ),
