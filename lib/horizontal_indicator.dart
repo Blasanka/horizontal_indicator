@@ -40,6 +40,7 @@ class DateIndicator extends StatefulWidget {
   final Color unSelectedBorderColor;
   final Color indicatorShadowColor;
   final Color indicatorColor;
+  final ValueChanged<int> onHolderTap;
 
   DateIndicator({
     this.holderColor,
@@ -50,6 +51,7 @@ class DateIndicator extends StatefulWidget {
     this.unSelectedBorderColor,
     this.indicatorShadowColor,
     this.indicatorColor,
+    this.onHolderTap,
   });
 
   static MyInheritedWidget of(BuildContext context) =>
@@ -127,6 +129,7 @@ class _DateIndicatorState extends State<DateIndicator> {
                   numberColor: widget.numberColor,
                   selectedBorderColor: widget.selectedBorderColor,
                   unSelectedBorderColor: widget.unSelectedBorderColor,
+                  onTap: widget.onHolderTap,
                 ));
           }),
     );
@@ -142,6 +145,7 @@ class DateHolder extends StatelessWidget {
     this.numberColor,
     this.selectedBorderColor,
     this.unSelectedBorderColor,
+    this.onTap,
   });
 
   final int index;
@@ -151,6 +155,7 @@ class DateHolder extends StatelessWidget {
   final Color numberColor;
   final Color selectedBorderColor;
   final Color unSelectedBorderColor;
+  final ValueChanged<int> onTap;
 
   Widget activeBubble() => Container(
         width: 15.0,
@@ -169,6 +174,7 @@ class DateHolder extends StatelessWidget {
       onTap: () {
         appState.toggleDateHolderActive(true);
         appState.setSelectedDay(index);
+        onTap(index+1);
       },
       child: Stack(
         children: <Widget>[

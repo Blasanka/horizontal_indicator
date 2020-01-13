@@ -5,4 +5,5 @@
 ## [0.0.2] - 13/01/2020 (January 2020)
 
 - Provided a way to add custom colors to indicator, date holder and texts.
+- onHolderTap function to get selected day.
 - Example app added.
