@@ -52,7 +52,7 @@ class DateIndicatorPage extends StatelessWidget {
 ```
 
 Go to example directory to see demo app with how to change colors:
-https://github.com/Blasanka/horizontal_indicator/example
+https://github.com/Blasanka/horizontal_indicator/tree/master/example
 
 Screenshots:
 
