@@ -2,6 +2,10 @@
 
 This package provides you horizontal date indicator.
 
+Description:
+
+Horizontal date indicator flutter package for letting developers easily get days of current month as horizontal scrollable bar that can add anywhere in a widget tree. Can mark specific days(to show available or active or to improve user experience). Can get the selected day or can perform task when selecting a day on the indicator.
+
 Implementation:
 
 Add `horizontal_indicator: <version>` to your pubspec.yaml file.
