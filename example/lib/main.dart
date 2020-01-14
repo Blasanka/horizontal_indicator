@@ -26,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _counter = 1;
 
   void _incrementCounter() {
     setState(() {
@@ -42,14 +42,16 @@ class _MyHomePageState extends State<MyHomePage> {
         bottom: PreferredSize(
           preferredSize: Size(double.infinity, 68),
           child: DateIndicator(
-            holderColor: Colors.grey.withOpacity(.5),
-            numberColor: Colors.red,
-            textColor: Colors.white,
-            activeBubbleColor: Colors.greenAccent,
-            unSelectedBorderColor: Colors.blueAccent,
-            selectedBorderColor: Colors.red,
-            indicatorColor: Colors.redAccent.withOpacity(.4),
-            indicatorShadowColor: Colors.redAccent.withOpacity(.3),
+            holderColor: Colors.lightBlueAccent.withOpacity(.5),
+            numberColor: Colors.blueAccent,
+            textColor: Colors.blue,
+            activeBubbleColor: Colors.redAccent,
+            unSelectedBorderColor: Colors.grey,
+            selectedBorderColor: Colors.blueAccent,
+            indicatorColor: Colors.greenAccent.withOpacity(.4),
+            indicatorShadowColor: Colors.greenAccent.withOpacity(.3),
+            activeHolders: [1,4,6,7,8,10,11,14,13,31,27],
+            initialDay: _counter,
             onHolderTap: (int index) {
               debugPrint(index.toString());
               setState(() => _counter = index);

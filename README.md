@@ -1,21 +1,24 @@
-# horizontal_indicator
+## horizontal_indicator
 
 This package provides you horizontal date indicator.
 
 Implementation:
 
-Add `horizontal_indicator: <version>` to your pubspect.yaml file.
+Add `horizontal_indicator: <version>` to your pubspec.yaml file.
 Then use `DateIndicator()` as a child of your any widget.
 That's it.
+
+To get latest `<version>` click on **installing** tab above.
 
 TODO: - Support anyother format like date. - Add Only date indicator option and page option.
 
 Note that this package uses `intl: ^0.16.0` for supporting formated date.
 
-## Example:
+#### Example One (Basic / Default):
 
 ```
 import 'package:flutter/material.dart';
+import 'package:horizontal_indicator/horizontal_indicator.dart';
 
 void main() => runApp(MyApp());
 
@@ -60,13 +63,42 @@ Screenshots:
 
 ![In a widget Flutter Date Indicator](/Screenshot_1.png?raw=true "In a Widget Flutter Date Indicator")
 
-## Getting Started
+#### Example two with holder tap action
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+```
+import 'package:flutter/material.dart';
+import 'package:horizontal_indicator/horizontal_indicator.dart';
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+class DateIndicatorPage extends StatefulWidget {
+
+  @override
+  _DateIndicatorPageState createState() => _DateIndicatorPageState();
+}
+
+class _DateIndicatorPageState extends State<DateIndicatorPage> {
+  int selectedDay;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        bottom: PreferredSize(
+          preferredSize: Size(double.infinity, 68),
+          child: DateIndicator(
+            onHolderTap: (int day) => setState(() => selectedDay = day),
+          ),
+        ),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              child: Center(child: Text("$selectedDay")),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```

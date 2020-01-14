@@ -1,6 +1,6 @@
 name: horizontal_indicator
-description: Horizontal indicator that let you scroll horizontally and add anything.
-version: 0.0.2
+description: This package let you add horizontal indicator with list view that you can show days with active bubble. You can even add this any where in the widget tree and also customize as you want.
+version: 0.0.3
 author: Asanka B.L. (Blasanka) <blasanka95@gmail.com>
 homepage: https://github.com/Blasanka/horizontal_indicator/
 

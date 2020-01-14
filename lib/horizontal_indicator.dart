@@ -8,7 +8,7 @@ class MyInheritedWidget extends InheritedWidget {
   final int selectedDay;
   final int monthDateCount;
   final bool isDateHolderActive;
-  final Map<int, bool> dayAvailabilityMap;
+  final List<int> activeHolders;
   final ValueChanged<bool> toggleDateHolderActive;
   final ValueChanged<int> setSelectedDay;
 
@@ -18,7 +18,7 @@ class MyInheritedWidget extends InheritedWidget {
     this.selectedDay,
     this.monthDateCount,
     this.isDateHolderActive,
-    this.dayAvailabilityMap,
+    this.activeHolders,
     this.toggleDateHolderActive,
     this.setSelectedDay,
     Widget child,
@@ -40,6 +40,8 @@ class DateIndicator extends StatefulWidget {
   final Color unSelectedBorderColor;
   final Color indicatorShadowColor;
   final Color indicatorColor;
+  final int initialDay;
+  final List<int> activeHolders;
   final ValueChanged<int> onHolderTap;
 
   DateIndicator({
@@ -51,11 +53,13 @@ class DateIndicator extends StatefulWidget {
     this.unSelectedBorderColor,
     this.indicatorShadowColor,
     this.indicatorColor,
+    this.initialDay,
+    this.activeHolders,
     this.onHolderTap,
   });
 
   static MyInheritedWidget of(BuildContext context) =>
-      context.ancestorWidgetOfExactType(MyInheritedWidget);
+      context.dependOnInheritedWidgetOfExactType();
 
   @override
   _DateIndicatorState createState() => _DateIndicatorState();
@@ -63,10 +67,9 @@ class DateIndicator extends StatefulWidget {
 
 class _DateIndicatorState extends State<DateIndicator> {
   DateTime date = DateTime.now();
-  int selectedDay = 1;
   int monthDateCount = 1;
+  int selectedDay = 1;
   bool isDateHolderActive = false;
-  Map<int, bool> dayAvailabilityMap = {};
 
   void toggleDateHolderActive(bool flag) {
     setState(() {
@@ -84,11 +87,10 @@ class _DateIndicatorState extends State<DateIndicator> {
   void initState() {
     final DateTime dateForValues = new DateTime(date.year, date.month + 1, 0);
     monthDateCount = dateForValues.day;
-
-    // Just to show how to activate when something exist for this day(from network response or something)
-    dayAvailabilityMap[1] = true;
-    dayAvailabilityMap[2] = true;
-    dayAvailabilityMap[3] = true;
+    if (widget.initialDay != null) {
+      setSelectedDay(widget.initialDay-1);
+      toggleDateHolderActive(true);
+    }
     super.initState();
   }
 
@@ -118,7 +120,7 @@ class _DateIndicatorState extends State<DateIndicator> {
                 selectedDay: selectedDay,
                 monthDateCount: monthDateCount,
                 isDateHolderActive: isDateHolderActive,
-                dayAvailabilityMap: dayAvailabilityMap,
+                activeHolders: widget.activeHolders,
                 toggleDateHolderActive: toggleDateHolderActive,
                 setSelectedDay: setSelectedDay,
                 child: DateHolder(
@@ -146,6 +148,7 @@ class DateHolder extends StatelessWidget {
     this.selectedBorderColor,
     this.unSelectedBorderColor,
     this.onTap,
+    this.activeHolders,
   });
 
   final int index;
@@ -156,6 +159,7 @@ class DateHolder extends StatelessWidget {
   final Color selectedBorderColor;
   final Color unSelectedBorderColor;
   final ValueChanged<int> onTap;
+  final List<int> activeHolders;
 
   Widget activeBubble() => Container(
         width: 15.0,
@@ -218,7 +222,7 @@ class DateHolder extends StatelessWidget {
               ),
             ],
           ),
-          (appState.dayAvailabilityMap[index] ?? false)
+          (appState.activeHolders?.contains(index+1) ?? false)
               ? Positioned(right: 8.0, bottom: 5.0, child: activeBubble())
               : Container(),
         ],
