@@ -63,9 +63,9 @@ https://github.com/Blasanka/horizontal_indicator/tree/master/example
 
 Screenshots:
 
-![Complete Page Flutter Date Indicator](/Screenshot_2.png?raw=true "Complete Page Flutter Date Indicator")
+![Complete Page Flutter Date Indicator](https://raw.githubusercontent.com/Blasanka/horizontal_indicator/master/Screenshot_2.png "Complete Page Flutter Date Indicator")
 
-![In a widget Flutter Date Indicator](/Screenshot_1.png?raw=true "In a Widget Flutter Date Indicator")
+![In a widget Flutter Date Indicator](https://raw.githubusercontent.com/Blasanka/horizontal_indicator/master/Screenshot_1.png "In a Widget Flutter Date Indicator")
 
 #### Example two with holder tap action
 

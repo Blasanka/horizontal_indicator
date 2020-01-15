@@ -88,7 +88,7 @@ class _DateIndicatorState extends State<DateIndicator> {
     final DateTime dateForValues = new DateTime(date.year, date.month + 1, 0);
     monthDateCount = dateForValues.day;
     if (widget.initialDay != null) {
-      setSelectedDay(widget.initialDay-1);
+      setSelectedDay(widget.initialDay);
       toggleDateHolderActive(true);
     }
     super.initState();
@@ -105,7 +105,8 @@ class _DateIndicatorState extends State<DateIndicator> {
         color: widget.indicatorColor ?? Theme.of(context).secondaryHeaderColor,
         boxShadow: [
           BoxShadow(
-              color: widget.indicatorShadowColor ?? Colors.blueAccent.withOpacity(.7),
+              color: widget.indicatorShadowColor ??
+                  Colors.blueAccent.withOpacity(.7),
               offset: Offset(0.0, .5),
               blurRadius: 3.0,
               spreadRadius: 0.3),
@@ -124,7 +125,7 @@ class _DateIndicatorState extends State<DateIndicator> {
                 toggleDateHolderActive: toggleDateHolderActive,
                 setSelectedDay: setSelectedDay,
                 child: DateHolder(
-                  index,
+                  index+1,
                   holderColor: widget.holderColor,
                   activeColor: widget.activeBubbleColor,
                   textColor: widget.textColor,
@@ -178,7 +179,7 @@ class DateHolder extends StatelessWidget {
       onTap: () {
         appState.toggleDateHolderActive(true);
         appState.setSelectedDay(index);
-        onTap(index+1);
+        onTap(index);
       },
       child: Stack(
         children: <Widget>[
@@ -212,7 +213,7 @@ class DateHolder extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: Text(
-                      "${index + 1}", // to avoid showing zero
+                      "${index}", // to avoid showing zero
                       style: TextStyle(
                           color: numberColor ?? Theme.of(context).primaryColor,
                           fontSize: 16.0),
@@ -222,7 +223,7 @@ class DateHolder extends StatelessWidget {
               ),
             ],
           ),
-          (appState.activeHolders?.contains(index+1) ?? false)
+          (appState.activeHolders?.contains(index) ?? false)
               ? Positioned(right: 8.0, bottom: 5.0, child: activeBubble())
               : Container(),
         ],
