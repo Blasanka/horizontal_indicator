@@ -106,3 +106,5 @@ class _DateIndicatorPageState extends State<DateIndicatorPage> {
   }
 }
 ```
+
+Contributor are welcome. Or if you encounter any bug, please mail to blasanka95@yahoo.com

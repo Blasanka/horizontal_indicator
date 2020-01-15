@@ -1,7 +1,7 @@
 name: horizontal_indicator
 description: Package to add horizontal indicator as list to show days with active bubble.
-version: 0.0.4
-#author: Asanka B.L. (Blasanka) <blasanka95@gmail.com>
+version: 0.0.5
+#author: Asanka B.L. (Blasanka) <blasanka95@yahoo.com>
 homepage: https://github.com/Blasanka/horizontal_indicator/
 
 environment:
