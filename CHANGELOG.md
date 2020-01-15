@@ -1,3 +1,14 @@
+#### [0.0.5] - 15/01/2020 (January 2020)
+
+- Parameters for changing indicator width and height.
+  (``indicatorWidth`` and ``indicatorHeight``)
+- Parameters for changing circle holder width and height.
+  (``circleHolderWidth`` and ``circleHolderHeight``)
+- Parameters for changing active bubble width and height.
+  (``activeBubbleWidth`` and ``activeBubbleHeight``)
+- Parameters for changing active bubble bottom and right position.
+  (``activeBubbleRightPosition`` and ``activeBubbleBottomPosition``)
+
 #### [0.0.4] - 15/01/2020 (January 2020)
 
 - [Day of week wrong] bug fixed.
