@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:horizontal_indicator/horizontal_indicator.dart';
+import 'package:indicator/indicator.dart';
 
 void main() {
   // test('Date indicator initialze test', () {

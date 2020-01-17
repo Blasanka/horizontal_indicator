@@ -25,7 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
 
 
-  horizontal_indicator:
+  indicator:
     path: ../
 
 dev_dependencies:

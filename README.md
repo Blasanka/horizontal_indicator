@@ -1,28 +1,36 @@
-## horizontal_indicator
+## indicator
 
 This package provides you horizontal date indicator.
 
-Description:
+##### Description:
 
 Horizontal date indicator flutter package for letting developers easily get days of current month as horizontal scrollable bar that can add anywhere in a widget tree. Can mark specific days(to show available or active or to improve user experience). Can get the selected day or can perform task when selecting a day on the indicator.
 
-Implementation:
+##### Get this package to your project:
 
-Add `horizontal_indicator: <version>` to your pubspec.yaml file.
+Add `indicator: <version>` to your pubspec.yaml file.
 Then use `DateIndicator()` as a child of your any widget.
 That's it.
 
 To get latest `<version>` click on **installing** tab above.
 
-TODO: - Support anyother format like date. - Add Only date indicator option and page option.
+##### Implementation:
 
-Note that this package uses `intl: ^0.16.0` for supporting formated date.
+ - Use default color and sizes or provide args to `DateIndicator()` constructor.
+ - Set `initialDay` value to select when first run (By default will not select any day).
+ - Get the selected holder value/day by using `onHolderTap`.
 
-#### Example One (Basic / Default):
+Please see examples and doc comments in the bottom for more.
+
+#### Notices:
+
+This package uses `intl: ^0.16.0` for supporting formated date.
+
+##### Example One (Basic / Default):
 
 ```
 import 'package:flutter/material.dart';
-import 'package:horizontal_indicator/horizontal_indicator.dart';
+import 'package:indicator/indicator.dart';
 
 void main() => runApp(MyApp());
 
@@ -59,19 +67,23 @@ class DateIndicatorPage extends StatelessWidget {
 ```
 
 Go to example directory to see demo app with how to change colors:
-https://github.com/Blasanka/horizontal_indicator/tree/master/example
+https://github.com/Blasanka/indicator/tree/master/example
 
-Screenshots:
+##### Screenshots:
 
-![Complete Page Flutter Date Indicator](https://raw.githubusercontent.com/Blasanka/horizontal_indicator/master/Screenshot_2.png "Complete Page Flutter Date Indicator")
+![active bubble top horizontal calendar flutter package blasanka](https://raw.githubusercontent.com/Blasanka/indicator/master/active_bubble_top_horizontal_calendar_flutter_package_by_blasanka.png "active bubble top horizontal calendar flutter package blasanka")
 
-![In a widget Flutter Date Indicator](https://raw.githubusercontent.com/Blasanka/horizontal_indicator/master/Screenshot_1.png "In a Widget Flutter Date Indicator")
+![active bubble top horizontal calendar flutter package horizontal](https://raw.githubusercontent.com/Blasanka/indicator/master/active_bubble_top_horizontal_calendar_flutter_package_horizontal.png "active bubble top horizontal calendar flutter package blasanka")
 
-#### Example two with holder tap action
+![Complete Page Flutter Date Indicator](https://raw.githubusercontent.com/Blasanka/indicator/master/Screenshot_2.png "Complete Page Flutter Date Indicator")
+
+![In a widget Flutter Date Indicator](https://raw.githubusercontent.com/Blasanka/indicator/master/Screenshot_1.png "In a Widget Flutter Date Indicator")
+
+##### Example two with holder tap action
 
 ```
 import 'package:flutter/material.dart';
-import 'package:horizontal_indicator/horizontal_indicator.dart';
+import 'package:indicator/indicator.dart';
 
 class DateIndicatorPage extends StatefulWidget {
 
@@ -107,4 +119,63 @@ class _DateIndicatorPageState extends State<DateIndicatorPage> {
 }
 ```
 
-Contributor are welcome. Or if you encounter any bug, please mail to blasanka95@yahoo.com
+##### Doc comments
+
+```
+
+/// @param indicatorWidth: default to device width.
+/// @param indicatorHeight: default to 68.0. If you are changing this below params also should change to stop layout becoming ugly.
+/// @param circleHolderWidth: default to 45.0.
+/// @param circleHolderHeight: default to 45.0.
+/// @param activeBubbleWidth: default to 15.0.
+/// @param activeBubbleHeight: default to 15.0.
+///
+/// @param  activeBubbleRightPosition: default to 8.0, adjust the right position of the active bubble
+/// @param  activeBubbleLeftPosition: default to 0, adjust the left position of the active bubble
+/// @param  activeBubbleBottomPosition: default to 5.0, adjust the bottom position of the active bubble
+///
+/// @param hideDayOfWeek: default to false, on top of the circle holder three letters of the day of the week  is displaying
+///
+/// @param activeHolders: default to empty list, that means no date holder shows active bubble.
+/// to show active bubbles provide *day of month* as a *int* List. Ex: If January [1,2,31], depending on the month end day have to be correct.
+///
+/// @param initialDay: for to select specific day when this widget first display
+///
+/// @param onHolderTap: is a function with an integer parameter to for you to access day selected value. (int i) => setState(() => yourVar = i),
+```
+
+##### available params
+
+```
+const DateIndicator({
+    this.holderColor,
+    this.activeBubbleColor,
+    this.textColor,
+    this.numberColor,
+    this.selectedBorderColor,
+    this.unSelectedBorderColor,
+    this.indicatorShadowColor,
+    this.indicatorColor,
+    this.indicatorWidth, // default to device width, ignore this if you need full width of the device
+    this.indicatorHeight = 68.0,
+    this.circleHolderWidth = 45.0,
+    this.circleHolderHeight = 45.0,
+    this.activeBubbleWidth = 15.0,
+    this.activeBubbleHeight = 15.0,
+    this.activeBubbleRightPosition = 8.0,
+    this.activeBubbleLeftPosition = 20.0,
+    this.activeBubbleBottomPosition = 5.0,
+    this.hideDayOfWeek = false,
+    this.initialDay,
+    this.activeHolders,
+    this.onHolderTap,
+});
+```
+
+##### Need to contribute?
+
+You are welcome(Currently there is no guideline but give your pull request I will review and let you know). 
+
+##### Having an issue?
+
+If you encounter any bug or confused with this package or even your suggestions, please send your valuable mail to blasanka95@yahoo.com

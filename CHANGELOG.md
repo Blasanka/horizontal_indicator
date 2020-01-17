@@ -1,3 +1,12 @@
+#### [0.0.6] - 17/01/2020 (January 2020)
+
+- Package name changed from `horizontal_indicator` to `indicator`.
+  (``hideDayOfWeek``)
+- Parameters for changing active bubble left added.
+  (``activeBubbleBottomPosition``)
+- Parameters to hide top day of week three letter.
+  (``hideDayOfWeek``)
+
 #### [0.0.5] - 15/01/2020 (January 2020)
 
 - Parameters for changing indicator width and height.

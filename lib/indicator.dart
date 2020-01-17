@@ -1,4 +1,4 @@
-library horizontal_indicator;
+library indicator;
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -24,7 +24,9 @@ class _IndicatorInheritedWidget extends InheritedWidget {
   final double activeBubbleWidth;
   final double activeBubbleHeight;
   final double activeBubbleRightPosition;
+  final double activeBubbleLeftPosition;
   final double activeBubbleBottomPosition;
+  final bool hideDayOfWeek;
   final int initialDay;
   final ValueChanged<bool> toggleDateHolderActive;
   final ValueChanged<int> setSelectedDay;
@@ -51,7 +53,9 @@ class _IndicatorInheritedWidget extends InheritedWidget {
     this.activeBubbleWidth,
     this.activeBubbleHeight,
     this.activeBubbleRightPosition,
+    this.activeBubbleLeftPosition,
     this.activeBubbleBottomPosition,
+    this.hideDayOfWeek,
     this.initialDay,
     this.toggleDateHolderActive,
     this.setSelectedDay,
@@ -71,6 +75,12 @@ class _IndicatorInheritedWidget extends InheritedWidget {
 /// @param circleHolderHeight: default to 45.0.
 /// @param activeBubbleWidth: default to 15.0.
 /// @param activeBubbleHeight: default to 15.0.
+///
+/// @param  activeBubbleRightPosition: default to 8.0, adjust the right position of the active bubble
+/// @param  activeBubbleLeftPosition: default to 20.0, adjust the left position of the active bubble
+/// @param  activeBubbleBottomPosition: default to 5.0, adjust the bottom position of the active bubble
+///
+/// @param hideDayOfWeek: default to false, on top of the circle holder three letters of the day of the week  is displaying
 ///
 /// @param activeHolders: default to empty list, that means no date holder shows active bubble.
 /// to show active bubbles provide *day of month* as a *int* List. Ex: If January [1,2,31], depending on the month end day have to be correct.
@@ -94,7 +104,9 @@ class DateIndicator extends StatefulWidget {
   final double activeBubbleWidth;
   final double activeBubbleHeight;
   final double activeBubbleRightPosition;
+  final double activeBubbleLeftPosition;
   final double activeBubbleBottomPosition;
+  final bool hideDayOfWeek;
   final int initialDay;
   final List<int> activeHolders;
   final ValueChanged<int> onHolderTap;
@@ -115,7 +127,9 @@ class DateIndicator extends StatefulWidget {
     this.activeBubbleWidth = 15.0,
     this.activeBubbleHeight = 15.0,
     this.activeBubbleRightPosition = 8.0,
+    this.activeBubbleLeftPosition = 20.0,
     this.activeBubbleBottomPosition = 5.0,
+    this.hideDayOfWeek = false,
     this.initialDay,
     this.activeHolders,
     this.onHolderTap,
@@ -161,7 +175,9 @@ class _DateIndicatorState extends State<DateIndicator> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.indicatorWidth ?? MediaQuery.of(context).size.width,
-      height: widget.indicatorHeight,
+      height: widget.hideDayOfWeek
+          ? (widget.indicatorHeight - 17) // if day of week hide, no need to show extra space
+          : widget.indicatorHeight,
       padding:
           const EdgeInsets.only(left: 7.0, right: 3.0, top: 2.0, bottom: 2.0),
       decoration: BoxDecoration(
@@ -197,7 +213,9 @@ class _DateIndicatorState extends State<DateIndicator> {
             activeBubbleWidth: widget.activeBubbleWidth,
             activeBubbleHeight: widget.activeBubbleHeight,
             activeBubbleRightPosition: widget.activeBubbleRightPosition,
+            activeBubbleLeftPosition: widget.activeBubbleLeftPosition,
             activeBubbleBottomPosition: widget.activeBubbleBottomPosition,
+            hideDayOfWeek: widget.hideDayOfWeek,
             toggleDateHolderActive: toggleDateHolderActive,
             setSelectedDay: setSelectedDay,
             child: _DateHolder(
@@ -246,6 +264,7 @@ class _DateHolder extends StatelessWidget {
   Widget activeBubble(state) {
     return Positioned(
       right: state.activeBubbleRightPosition,
+      left: state.activeBubbleLeftPosition,
       bottom: state.activeBubbleBottomPosition,
       child: Container(
         width: state.activeBubbleWidth,
@@ -262,16 +281,18 @@ class _DateHolder extends StatelessWidget {
       String dayOfWeek, BuildContext context, _IndicatorInheritedWidget state) {
     return Column(
       children: <Widget>[
-        Container(
-          margin: const EdgeInsets.only(right: 5.0),
-          child: Text(
-            "$dayOfWeek",
-            style: TextStyle(
-              color: state.textColor ?? Theme.of(context).primaryColor,
-              fontSize: 12.0,
+        !state.hideDayOfWeek
+          ? Container(
+            margin: const EdgeInsets.only(right: 5.0),
+            child: Text(
+              "$dayOfWeek",
+              style: TextStyle(
+                color: state.textColor ?? Theme.of(context).primaryColor,
+                fontSize: 12.0,
+              ),
             ),
-          ),
-        ),
+          )
+          : SizedBox(),
         _CircleHolder(index: index),
       ],
     );

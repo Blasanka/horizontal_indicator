@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:horizontal_indicator/horizontal_indicator.dart';
+import 'package:indicator/indicator.dart';
 
 void main() => runApp(MyApp());
 
@@ -50,6 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
             selectedBorderColor: Colors.blueAccent,
             indicatorColor: Colors.greenAccent.withOpacity(.4),
             indicatorShadowColor: Colors.greenAccent.withOpacity(.3),
+//            hideDayOfWeek: true,
+//            activeBubbleLeftPosition: 0,
+//            activeBubbleRightPosition: 30,
+//            activeBubbleBottomPosition: 32,
             activeHolders: [1,4,6,7,8,10,11,14,13,31,27],
             initialDay: _counter,
             onHolderTap: (int index) {
