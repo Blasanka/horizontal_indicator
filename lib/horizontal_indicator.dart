@@ -1,6 +1,7 @@
 library horizontal_indicator;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
 
 class _DateIndicatorInheritedWidget extends InheritedWidget {
@@ -15,10 +16,10 @@ class _DateIndicatorInheritedWidget extends InheritedWidget {
   final Color numberColor;
   final Color selectedBorderColor;
   final Color unSelectedBorderColor;
-  final Color horizontal_indicatorShadowColor;
-  final Color horizontal_indicatorColor;
-  final double horizontal_indicatorWidth;
-  final double horizontal_indicatorHeight;
+  final Color indicatorShadowColor;
+  final Color indicatorColor;
+  final double indicatorWidth;
+  final double indicatorHeight;
   final double circleHolderWidth;
   final double circleHolderHeight;
   final double activeBubbleWidth;
@@ -44,10 +45,10 @@ class _DateIndicatorInheritedWidget extends InheritedWidget {
     this.numberColor,
     this.selectedBorderColor,
     this.unSelectedBorderColor,
-    this.horizontal_indicatorShadowColor,
-    this.horizontal_indicatorColor,
-    this.horizontal_indicatorWidth,
-    this.horizontal_indicatorHeight,
+    this.indicatorShadowColor,
+    this.indicatorColor,
+    this.indicatorWidth,
+    this.indicatorHeight,
     this.circleHolderWidth,
     this.circleHolderHeight,
     this.activeBubbleWidth,
@@ -95,10 +96,10 @@ class DateIndicator extends StatefulWidget {
   final Color numberColor;
   final Color selectedBorderColor;
   final Color unSelectedBorderColor;
-  final Color horizontal_indicatorShadowColor;
-  final Color horizontal_indicatorColor;
-  final double horizontal_indicatorWidth;
-  final double horizontal_indicatorHeight;
+  final Color indicatorShadowColor;
+  final Color indicatorColor;
+  final double indicatorWidth;
+  final double indicatorHeight;
   final double circleHolderWidth;
   final double circleHolderHeight;
   final double activeBubbleWidth;
@@ -118,10 +119,10 @@ class DateIndicator extends StatefulWidget {
     this.numberColor,
     this.selectedBorderColor,
     this.unSelectedBorderColor,
-    this.horizontal_indicatorShadowColor,
-    this.horizontal_indicatorColor,
-    this.horizontal_indicatorWidth, // default to device width, ignore this if you need full width of the device
-    this.horizontal_indicatorHeight = 68.0,
+    this.indicatorShadowColor,
+    this.indicatorColor,
+    this.indicatorWidth, // default to device width, ignore this if you need full width of the device
+    this.indicatorHeight = 68.0,
     this.circleHolderWidth = 45.0,
     this.circleHolderHeight = 45.0,
     this.activeBubbleWidth = 15.0,
@@ -148,6 +149,9 @@ class _DateIndicatorState extends State<DateIndicator> {
   int selectedDay = 1;
   bool isDateHolderActive = false;
 
+  // Controller to manage to jump to initial day
+  ScrollController dateIndicatorController;
+
   void toggleDateHolderActive(bool flag) {
     setState(() {
       isDateHolderActive = flag;
@@ -162,11 +166,21 @@ class _DateIndicatorState extends State<DateIndicator> {
 
   @override
   void initState() {
+    dateIndicatorController = ScrollController();
+
     final DateTime dateForValues = new DateTime(date.year, date.month + 1, 0);
     monthDateCount = dateForValues.day;
+
     if (widget.initialDay != null) {
       setSelectedDay(widget.initialDay);
       toggleDateHolderActive(true);
+
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        setState(() {
+          if (widget.initialDay > 6)
+            dateIndicatorController.jumpTo(40.0 * widget.initialDay);
+        });
+      });
     }
     super.initState();
   }
@@ -174,20 +188,18 @@ class _DateIndicatorState extends State<DateIndicator> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width:
-          widget.horizontal_indicatorWidth ?? MediaQuery.of(context).size.width,
+      width: widget.indicatorWidth ?? MediaQuery.of(context).size.width,
       height: widget.hideDayOfWeek
-          ? (widget.horizontal_indicatorHeight -
+          ? (widget.indicatorHeight -
               17) // if day of week hide, no need to show extra space
-          : widget.horizontal_indicatorHeight,
+          : widget.indicatorHeight,
       padding:
           const EdgeInsets.only(left: 7.0, right: 3.0, top: 2.0, bottom: 2.0),
       decoration: BoxDecoration(
-        color: widget.horizontal_indicatorColor ??
-            Theme.of(context).secondaryHeaderColor,
+        color: widget.indicatorColor ?? Theme.of(context).secondaryHeaderColor,
         boxShadow: [
           BoxShadow(
-            color: widget.horizontal_indicatorShadowColor ??
+            color: widget.indicatorShadowColor ??
                 Colors.blueAccent.withOpacity(.7),
             offset: Offset(0.0, .5),
             blurRadius: 3.0,
@@ -196,6 +208,7 @@ class _DateIndicatorState extends State<DateIndicator> {
         ],
       ),
       child: ListView.builder(
+        controller: dateIndicatorController,
         scrollDirection: Axis.horizontal,
         itemCount: monthDateCount, // to avoid showing zero
         itemBuilder: (BuildContext context, int index) {

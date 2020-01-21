@@ -26,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 24;
+  int _counter = 31;
 
   void _incrementCounter() {
     setState(() {
@@ -48,8 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
             activeBubbleColor: Colors.redAccent,
             unSelectedBorderColor: Colors.grey,
             selectedBorderColor: Colors.blueAccent,
-            horizontal_indicatorColor: Colors.greenAccent.withOpacity(.4),
-            horizontal_indicatorShadowColor: Colors.greenAccent.withOpacity(.3),
+            indicatorColor: Colors.greenAccent.withOpacity(.4),
+            indicatorShadowColor: Colors.greenAccent.withOpacity(.3),
 //            hideDayOfWeek: true,
 //            activeBubbleLeftPosition: 0,
 //            activeBubbleRightPosition: 30,
