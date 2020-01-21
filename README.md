@@ -1,14 +1,14 @@
-## indicator
+## horizontal_indicator
 
-This package provides you horizontal date indicator.
+This package provides you horizontal date horizontal_indicator.
 
 ##### Description:
 
-Horizontal date indicator flutter package for letting developers easily get days of current month as horizontal scrollable bar that can add anywhere in a widget tree. Can mark specific days(to show available or active or to improve user experience). Can get the selected day or can perform task when selecting a day on the indicator.
+Horizontal date horizontal_indicator flutter package for letting developers easily get days of current month as horizontal scrollable bar that can add anywhere in a widget tree. Can mark specific days(to show available or active or to improve user experience). Can get the selected day or can perform task when selecting a day on the horizontal_indicator.
 
 ##### Get this package to your project:
 
-Add `indicator: <version>` to your pubspec.yaml file.
+Add `horizontal_indicator: <version>` to your pubspec.yaml file.
 Then use `DateIndicator()` as a child of your any widget.
 That's it.
 
@@ -30,7 +30,7 @@ This package uses `intl: ^0.16.0` for supporting formated date.
 
 ```
 import 'package:flutter/material.dart';
-import 'package:indicator/indicator.dart';
+import 'package:horizontal_indicator/horizontal_indicator.dart';
 
 void main() => runApp(MyApp());
 
@@ -67,23 +67,23 @@ class DateIndicatorPage extends StatelessWidget {
 ```
 
 Go to example directory to see demo app with how to change colors:
-https://github.com/Blasanka/indicator/tree/master/example
+https://github.com/Blasanka/horizontal_indicator/tree/master/example
 
 ##### Screenshots:
 
-![active bubble top horizontal calendar flutter package blasanka](https://raw.githubusercontent.com/Blasanka/indicator/master/active_bubble_top_horizontal_calendar_flutter_package_by_blasanka.png "active bubble top horizontal calendar flutter package blasanka")
+![active bubble top horizontal calendar flutter package blasanka](https://raw.githubusercontent.com/Blasanka/horizontal_indicator/master/active_bubble_top_horizontal_calendar_flutter_package_by_blasanka.png "active bubble top horizontal calendar flutter package blasanka")
 
-![active bubble top horizontal calendar flutter package horizontal](https://raw.githubusercontent.com/Blasanka/indicator/master/active_bubble_top_horizontal_calendar_flutter_package_horizontal.png "active bubble top horizontal calendar flutter package blasanka")
+![active bubble top horizontal calendar flutter package horizontal](https://raw.githubusercontent.com/Blasanka/horizontal_indicator/master/active_bubble_top_horizontal_calendar_flutter_package_horizontal.png "active bubble top horizontal calendar flutter package blasanka")
 
-![Complete Page Flutter Date Indicator](https://raw.githubusercontent.com/Blasanka/indicator/master/Screenshot_2.png "Complete Page Flutter Date Indicator")
+![Complete Page Flutter Date horizontal_indicator](https://raw.githubusercontent.com/Blasanka/horizontal_indicator/master/Screenshot_2.png "Complete Page Flutter Date horizontal_indicator")
 
-![In a widget Flutter Date Indicator](https://raw.githubusercontent.com/Blasanka/indicator/master/Screenshot_1.png "In a Widget Flutter Date Indicator")
+![In a widget Flutter Date horizontal_indicator](https://raw.githubusercontent.com/Blasanka/horizontal_indicator/master/Screenshot_1.png "In a Widget Flutter Date horizontal_indicator")
 
 ##### Example two with holder tap action
 
 ```
 import 'package:flutter/material.dart';
-import 'package:indicator/indicator.dart';
+import 'package:horizontal_indicator/horizontal_indicator.dart';
 
 class DateIndicatorPage extends StatefulWidget {
 
@@ -123,8 +123,8 @@ class _DateIndicatorPageState extends State<DateIndicatorPage> {
 
 ```
 
-/// @param indicatorWidth: default to device width.
-/// @param indicatorHeight: default to 68.0. If you are changing this below params also should change to stop layout becoming ugly.
+/// @param horizontal_indicatorWidth: default to device width.
+/// @param horizontal_indicatorHeight: default to 68.0. If you are changing this below params also should change to stop layout becoming ugly.
 /// @param circleHolderWidth: default to 45.0.
 /// @param circleHolderHeight: default to 45.0.
 /// @param activeBubbleWidth: default to 15.0.
@@ -154,10 +154,10 @@ const DateIndicator({
     this.numberColor,
     this.selectedBorderColor,
     this.unSelectedBorderColor,
-    this.indicatorShadowColor,
-    this.indicatorColor,
-    this.indicatorWidth, // default to device width, ignore this if you need full width of the device
-    this.indicatorHeight = 68.0,
+    this.horizontal_indicatorShadowColor,
+    this.horizontal_indicatorColor,
+    this.horizontal_indicatorWidth, // default to device width, ignore this if you need full width of the device
+    this.horizontal_indicatorHeight = 68.0,
     this.circleHolderWidth = 45.0,
     this.circleHolderHeight = 45.0,
     this.activeBubbleWidth = 15.0,

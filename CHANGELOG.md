@@ -1,22 +1,24 @@
+#### [0.0.7] - 21/01/2020 (January 2020)
+
+  - One bug fixed (`"onTap was called on null fixed"`)
+
 #### [0.0.6] - 17/01/2020 (January 2020)
 
-- Package name changed from `horizontal_indicator` to `indicator`.
-  (``hideDayOfWeek``)
 - Parameters for changing active bubble left added.
-  (``activeBubbleBottomPosition``)
+  (`activeBubbleBottomPosition`)
 - Parameters to hide top day of week three letter.
-  (``hideDayOfWeek``)
+  (`hideDayOfWeek`)
 
 #### [0.0.5] - 15/01/2020 (January 2020)
 
-- Parameters for changing indicator width and height.
-  (``indicatorWidth`` and ``indicatorHeight``)
+- Parameters for changing horizontal_indicator width and height.
+  (`horizontal_indicatorWidth` and `horizontal_indicatorHeight`)
 - Parameters for changing circle holder width and height.
-  (``circleHolderWidth`` and ``circleHolderHeight``)
+  (`circleHolderWidth` and `circleHolderHeight`)
 - Parameters for changing active bubble width and height.
-  (``activeBubbleWidth`` and ``activeBubbleHeight``)
+  (`activeBubbleWidth` and `activeBubbleHeight`)
 - Parameters for changing active bubble bottom and right position.
-  (``activeBubbleRightPosition`` and ``activeBubbleBottomPosition``)
+  (`activeBubbleRightPosition` and `activeBubbleBottomPosition`)
 
 #### [0.0.4] - 15/01/2020 (January 2020)
 
@@ -31,7 +33,7 @@
 
 #### [0.0.2] - 13/01/2020 (January 2020)
 
-- Provided a way to add custom colors to indicator, date holder and texts.
+- Provided a way to add custom colors to horizontal_indicator, date holder and texts.
 - onHolderTap function to get selected day.
 - Example app added.
 

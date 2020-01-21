@@ -3,7 +3,7 @@ library horizontal_indicator;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class _horizontal_indicatorInheritedWidget extends InheritedWidget {
+class _DateIndicatorInheritedWidget extends InheritedWidget {
   final DateTime date;
   final int selectedDay;
   final int monthDateCount;
@@ -31,7 +31,7 @@ class _horizontal_indicatorInheritedWidget extends InheritedWidget {
   final ValueChanged<bool> toggleDateHolderActive;
   final ValueChanged<int> setSelectedDay;
 
-  const _horizontal_indicatorInheritedWidget({
+  const _DateIndicatorInheritedWidget({
     Key key,
     this.date,
     this.selectedDay,
@@ -63,7 +63,7 @@ class _horizontal_indicatorInheritedWidget extends InheritedWidget {
   }) : super(key: key, child: child);
 
   @override
-  bool updateShouldNotify(_horizontal_indicatorInheritedWidget oldWidget) {
+  bool updateShouldNotify(_DateIndicatorInheritedWidget oldWidget) {
     return oldWidget.selectedDay != selectedDay ||
         oldWidget.toggleDateHolderActive != toggleDateHolderActive;
   }
@@ -135,7 +135,7 @@ class DateIndicator extends StatefulWidget {
     this.onHolderTap,
   });
 
-  static _horizontal_indicatorInheritedWidget of(BuildContext context) =>
+  static _DateIndicatorInheritedWidget of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType();
 
   @override
@@ -174,14 +174,17 @@ class _DateIndicatorState extends State<DateIndicator> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.horizontal_indicatorWidth ?? MediaQuery.of(context).size.width,
+      width:
+          widget.horizontal_indicatorWidth ?? MediaQuery.of(context).size.width,
       height: widget.hideDayOfWeek
-          ? (widget.horizontal_indicatorHeight - 17) // if day of week hide, no need to show extra space
+          ? (widget.horizontal_indicatorHeight -
+              17) // if day of week hide, no need to show extra space
           : widget.horizontal_indicatorHeight,
       padding:
           const EdgeInsets.only(left: 7.0, right: 3.0, top: 2.0, bottom: 2.0),
       decoration: BoxDecoration(
-        color: widget.horizontal_indicatorColor ?? Theme.of(context).secondaryHeaderColor,
+        color: widget.horizontal_indicatorColor ??
+            Theme.of(context).secondaryHeaderColor,
         boxShadow: [
           BoxShadow(
             color: widget.horizontal_indicatorShadowColor ??
@@ -196,7 +199,7 @@ class _DateIndicatorState extends State<DateIndicator> {
         scrollDirection: Axis.horizontal,
         itemCount: monthDateCount, // to avoid showing zero
         itemBuilder: (BuildContext context, int index) {
-          return _horizontal_indicatorInheritedWidget(
+          return _DateIndicatorInheritedWidget(
             date: date,
             selectedDay: selectedDay,
             monthDateCount: monthDateCount,
@@ -250,12 +253,14 @@ class _DateHolder extends StatelessWidget {
       onTap: () {
         state.toggleDateHolderActive(true);
         state.setSelectedDay(index);
-        onTap(index);
+        if (onTap != null) onTap(index);
       },
       child: Stack(
         children: <Widget>[
           buildDateHolder(dayOfWeek, context, state),
-          (state.activeHolders?.contains(index) ?? false) ? activeBubble(state) : Container(),
+          (state.activeHolders?.contains(index) ?? false)
+              ? activeBubble(state)
+              : Container(),
         ],
       ),
     );
@@ -277,22 +282,22 @@ class _DateHolder extends StatelessWidget {
     );
   }
 
-  Column buildDateHolder(
-      String dayOfWeek, BuildContext context, _horizontal_indicatorInheritedWidget state) {
+  Column buildDateHolder(String dayOfWeek, BuildContext context,
+      _DateIndicatorInheritedWidget state) {
     return Column(
       children: <Widget>[
         !state.hideDayOfWeek
-          ? Container(
-            margin: const EdgeInsets.only(right: 5.0),
-            child: Text(
-              "$dayOfWeek",
-              style: TextStyle(
-                color: state.textColor ?? Theme.of(context).primaryColor,
-                fontSize: 12.0,
-              ),
-            ),
-          )
-          : SizedBox(),
+            ? Container(
+                margin: const EdgeInsets.only(right: 5.0),
+                child: Text(
+                  "$dayOfWeek",
+                  style: TextStyle(
+                    color: state.textColor ?? Theme.of(context).primaryColor,
+                    fontSize: 12.0,
+                  ),
+                ),
+              )
+            : SizedBox(),
         _CircleHolder(index: index),
       ],
     );

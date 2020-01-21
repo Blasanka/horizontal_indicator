@@ -1,8 +1,8 @@
-name: indicator
+name: horizontal_indicator
 description: Package to add day of month with day of week as horizontal list with active bubbles.
-version: 0.0.6
-#author: Asanka B.L. (Blasanka) <blasanka95@yahoo.com>
-homepage: https://github.com/Blasanka/indicator/
+version: 0.0.7
+author: Asanka B.L. (Blasanka) <blasanka95@yahoo.com>
+homepage: https://github.com/Blasanka/horizontal_indicator/
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
