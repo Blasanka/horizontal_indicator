@@ -1,9 +1,9 @@
-library indicator;
+library horizontal_indicator;
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class _IndicatorInheritedWidget extends InheritedWidget {
+class _horizontal_indicatorInheritedWidget extends InheritedWidget {
   final DateTime date;
   final int selectedDay;
   final int monthDateCount;
@@ -15,10 +15,10 @@ class _IndicatorInheritedWidget extends InheritedWidget {
   final Color numberColor;
   final Color selectedBorderColor;
   final Color unSelectedBorderColor;
-  final Color indicatorShadowColor;
-  final Color indicatorColor;
-  final double indicatorWidth;
-  final double indicatorHeight;
+  final Color horizontal_indicatorShadowColor;
+  final Color horizontal_indicatorColor;
+  final double horizontal_indicatorWidth;
+  final double horizontal_indicatorHeight;
   final double circleHolderWidth;
   final double circleHolderHeight;
   final double activeBubbleWidth;
@@ -31,7 +31,7 @@ class _IndicatorInheritedWidget extends InheritedWidget {
   final ValueChanged<bool> toggleDateHolderActive;
   final ValueChanged<int> setSelectedDay;
 
-  const _IndicatorInheritedWidget({
+  const _horizontal_indicatorInheritedWidget({
     Key key,
     this.date,
     this.selectedDay,
@@ -44,10 +44,10 @@ class _IndicatorInheritedWidget extends InheritedWidget {
     this.numberColor,
     this.selectedBorderColor,
     this.unSelectedBorderColor,
-    this.indicatorShadowColor,
-    this.indicatorColor,
-    this.indicatorWidth,
-    this.indicatorHeight,
+    this.horizontal_indicatorShadowColor,
+    this.horizontal_indicatorColor,
+    this.horizontal_indicatorWidth,
+    this.horizontal_indicatorHeight,
     this.circleHolderWidth,
     this.circleHolderHeight,
     this.activeBubbleWidth,
@@ -63,14 +63,14 @@ class _IndicatorInheritedWidget extends InheritedWidget {
   }) : super(key: key, child: child);
 
   @override
-  bool updateShouldNotify(_IndicatorInheritedWidget oldWidget) {
+  bool updateShouldNotify(_horizontal_indicatorInheritedWidget oldWidget) {
     return oldWidget.selectedDay != selectedDay ||
         oldWidget.toggleDateHolderActive != toggleDateHolderActive;
   }
 }
 
-/// @param indicatorWidth: default to device width.
-/// @param indicatorHeight: default to 68.0. If you are changing this below params also should change to stop layout becoming ugly.
+/// @param horizontal_indicatorWidth: default to device width.
+/// @param horizontal_indicatorHeight: default to 68.0. If you are changing this below params also should change to stop layout becoming ugly.
 /// @param circleHolderWidth: default to 45.0.
 /// @param circleHolderHeight: default to 45.0.
 /// @param activeBubbleWidth: default to 15.0.
@@ -95,10 +95,10 @@ class DateIndicator extends StatefulWidget {
   final Color numberColor;
   final Color selectedBorderColor;
   final Color unSelectedBorderColor;
-  final Color indicatorShadowColor;
-  final Color indicatorColor;
-  final double indicatorWidth;
-  final double indicatorHeight;
+  final Color horizontal_indicatorShadowColor;
+  final Color horizontal_indicatorColor;
+  final double horizontal_indicatorWidth;
+  final double horizontal_indicatorHeight;
   final double circleHolderWidth;
   final double circleHolderHeight;
   final double activeBubbleWidth;
@@ -118,10 +118,10 @@ class DateIndicator extends StatefulWidget {
     this.numberColor,
     this.selectedBorderColor,
     this.unSelectedBorderColor,
-    this.indicatorShadowColor,
-    this.indicatorColor,
-    this.indicatorWidth, // default to device width, ignore this if you need full width of the device
-    this.indicatorHeight = 68.0,
+    this.horizontal_indicatorShadowColor,
+    this.horizontal_indicatorColor,
+    this.horizontal_indicatorWidth, // default to device width, ignore this if you need full width of the device
+    this.horizontal_indicatorHeight = 68.0,
     this.circleHolderWidth = 45.0,
     this.circleHolderHeight = 45.0,
     this.activeBubbleWidth = 15.0,
@@ -135,7 +135,7 @@ class DateIndicator extends StatefulWidget {
     this.onHolderTap,
   });
 
-  static _IndicatorInheritedWidget of(BuildContext context) =>
+  static _horizontal_indicatorInheritedWidget of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType();
 
   @override
@@ -174,17 +174,17 @@ class _DateIndicatorState extends State<DateIndicator> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.indicatorWidth ?? MediaQuery.of(context).size.width,
+      width: widget.horizontal_indicatorWidth ?? MediaQuery.of(context).size.width,
       height: widget.hideDayOfWeek
-          ? (widget.indicatorHeight - 17) // if day of week hide, no need to show extra space
-          : widget.indicatorHeight,
+          ? (widget.horizontal_indicatorHeight - 17) // if day of week hide, no need to show extra space
+          : widget.horizontal_indicatorHeight,
       padding:
           const EdgeInsets.only(left: 7.0, right: 3.0, top: 2.0, bottom: 2.0),
       decoration: BoxDecoration(
-        color: widget.indicatorColor ?? Theme.of(context).secondaryHeaderColor,
+        color: widget.horizontal_indicatorColor ?? Theme.of(context).secondaryHeaderColor,
         boxShadow: [
           BoxShadow(
-            color: widget.indicatorShadowColor ??
+            color: widget.horizontal_indicatorShadowColor ??
                 Colors.blueAccent.withOpacity(.7),
             offset: Offset(0.0, .5),
             blurRadius: 3.0,
@@ -196,7 +196,7 @@ class _DateIndicatorState extends State<DateIndicator> {
         scrollDirection: Axis.horizontal,
         itemCount: monthDateCount, // to avoid showing zero
         itemBuilder: (BuildContext context, int index) {
-          return _IndicatorInheritedWidget(
+          return _horizontal_indicatorInheritedWidget(
             date: date,
             selectedDay: selectedDay,
             monthDateCount: monthDateCount,
@@ -278,7 +278,7 @@ class _DateHolder extends StatelessWidget {
   }
 
   Column buildDateHolder(
-      String dayOfWeek, BuildContext context, _IndicatorInheritedWidget state) {
+      String dayOfWeek, BuildContext context, _horizontal_indicatorInheritedWidget state) {
     return Column(
       children: <Widget>[
         !state.hideDayOfWeek

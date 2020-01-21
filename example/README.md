@@ -1,13 +1,13 @@
 # example
 
-Example for Horizontal Indicator
+Example for Horizontal horizontal_indicator
 
 
 #### Example One (Basic / Default):
 
 ```
 import 'package:flutter/material.dart';
-import 'package:indicator/indicator.dart';
+import 'package:horizontal_indicator/horizontal_indicator.dart';
 
 void main() => runApp(MyApp());
 
@@ -44,13 +44,13 @@ class DateIndicatorPage extends StatelessWidget {
 ```
 
 Go to example directory to see demo app with how to change colors:
-https://github.com/Blasanka/indicator/tree/master/example
+https://github.com/Blasanka/horizontal_indicator/tree/master/example
 
 #### Example two with holder tap action
 
 ```
 import 'package:flutter/material.dart';
-import 'package:indicator/indicator.dart';
+import 'package:horizontal_indicator/horizontal_indicator.dart';
 
 class DateIndicatorPage extends StatefulWidget {
 

@@ -1,5 +1,5 @@
 name: example
-description: Example for Horizontal Indicator
+description: Example for horizontal_indicator
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -25,7 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
 
 
-  indicator:
+  horizontal_indicator:
     path: ../
 
 dev_dependencies:
