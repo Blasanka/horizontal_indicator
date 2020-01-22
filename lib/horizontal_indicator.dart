@@ -70,25 +70,34 @@ class _DateIndicatorInheritedWidget extends InheritedWidget {
   }
 }
 
-/// @param horizontal_indicatorWidth: default to device width.
-/// @param horizontal_indicatorHeight: default to 68.0. If you are changing this below params also should change to stop layout becoming ugly.
-/// @param circleHolderWidth: default to 45.0.
-/// @param circleHolderHeight: default to 45.0.
-/// @param activeBubbleWidth: default to 15.0.
-/// @param activeBubbleHeight: default to 15.0.
+/// @param [`indicatorWidth`]: default to device width.
 ///
-/// @param  activeBubbleRightPosition: default to 8.0, adjust the right position of the active bubble
-/// @param  activeBubbleLeftPosition: default to 20.0, adjust the left position of the active bubble
-/// @param  activeBubbleBottomPosition: default to 5.0, adjust the bottom position of the active bubble
+/// @param [`indicatorHeight`]: default to `68.0`. If you are changing this below params also should change to stop layout becoming ugly.
 ///
-/// @param hideDayOfWeek: default to false, on top of the circle holder three letters of the day of the week  is displaying
+/// @param [`circleHolderWidth`]: default to `45.0`.
 ///
-/// @param activeHolders: default to empty list, that means no date holder shows active bubble.
-/// to show active bubbles provide *day of month* as a *int* List. Ex: If January [1,2,31], depending on the month end day have to be correct.
+/// @param [`circleHolderHeight`]: default to `45.0`.
 ///
-/// @param initialDay: for to select specific day when this widget first display
+/// @param [`activeBubbleWidth`]: default to `15.0`.
 ///
-/// @param onHolderTap: is a function with an integer parameter to for you to access day selected value. (int i) => setState(() => yourVar = i),
+/// @param [`activeBubbleHeight`]: default to `15.0`.
+///
+/// @param  [`activeBubbleRightPosition`]: default to `8.0`, adjust the right position of the active bubble
+///
+/// @param  [`activeBubbleLeftPosition`]: default to `20.0`, adjust the left position of the active bubble
+///
+/// @param  [`activeBubbleBottomPosition`]: default to `5.0`, adjust the bottom position of the active bubble
+///
+/// @param [`hideDayOfWeek`]: default to `false`, on top of the circle holder three letters of the day of the week  is displaying
+///
+/// @param [`initialDay`]: for to select specific day when this widget first display
+///
+/// @param [`jumpToInitialDay`]: set to `true` by default, this will scroll the day holder list view to initial day
+///
+/// @param [`activeHolders`]: default to empty list, that means no date holder shows active bubble.
+/// to show active bubbles provide *day of month* as a `int` `List`. Ex: If January `[1,2,31]`, depending on the month end day have to be correct.
+///
+/// @param [`onHolderTap`]: is a function with an integer parameter to for you to access day selected value. ```(int i) => setState(() => yourVar = i)```,
 class DateIndicator extends StatefulWidget {
   final Color holderColor;
   final Color activeBubbleColor;
@@ -109,6 +118,7 @@ class DateIndicator extends StatefulWidget {
   final double activeBubbleBottomPosition;
   final bool hideDayOfWeek;
   final int initialDay;
+  final bool jumpToInitialDay;
   final List<int> activeHolders;
   final ValueChanged<int> onHolderTap;
 
@@ -132,6 +142,7 @@ class DateIndicator extends StatefulWidget {
     this.activeBubbleBottomPosition = 5.0,
     this.hideDayOfWeek = false,
     this.initialDay,
+    this.jumpToInitialDay = true,
     this.activeHolders,
     this.onHolderTap,
   });
@@ -175,12 +186,14 @@ class _DateIndicatorState extends State<DateIndicator> {
       setSelectedDay(widget.initialDay);
       toggleDateHolderActive(true);
 
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        setState(() {
-          if (widget.initialDay > 6)
-            dateIndicatorController.jumpTo(40.0 * widget.initialDay);
+      if (widget.jumpToInitialDay) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          setState(() {
+            if (widget.initialDay > 6)
+              dateIndicatorController.jumpTo(40.0 * widget.initialDay);
+          });
         });
-      });
+      }
     }
     super.initState();
   }

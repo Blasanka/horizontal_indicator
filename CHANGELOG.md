@@ -1,3 +1,7 @@
+#### [0.0.8] - 21/01/2020 (January 2020)
+
+  - Jump to initial day added, if initial day added.
+
 #### [0.0.7] - 21/01/2020 (January 2020)
 
   - One bug fixed (`"onTap was called on null fixed"`)
