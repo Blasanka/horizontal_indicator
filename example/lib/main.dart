@@ -26,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 31;
+  int _counter = 1;
 
   void _incrementCounter() {
     setState(() {
@@ -54,27 +54,19 @@ class _MyHomePageState extends State<MyHomePage> {
 //            activeBubbleLeftPosition: 0,
 //            activeBubbleRightPosition: 30,
 //            activeBubbleBottomPosition: 32,
-            activeHolders: [1,4,6,7,8,10,11,14,13,31,27],
+            activeHolders: [1, 4, 6, 7, 8, 10, 11, 14, 13, 31, 27],
             initialDay: _counter,
-            onHolderTap: (int index) {
-              debugPrint(index.toString());
-              setState(() => _counter = index);
-            },
+            onHolderTap: (int index) => onHolderTapped(index),
+            updateSelectedDay: _counter,
           ),
         ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+        child: PageView.builder(
+          controller: PageController(initialPage: _counter),
+          onPageChanged: (int index) => onHolderTapped(index),
+          itemBuilder: (BuildContext context, int index) =>
+              buildColumn(context),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -82,6 +74,26 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
+    );
+  }
+
+  void onHolderTapped(int index) {
+    debugPrint(index.toString());
+    setState(() => _counter = index);
+  }
+
+  Column buildColumn(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          'You have pushed the button this many times:',
+        ),
+        Text(
+          '$_counter',
+          style: Theme.of(context).textTheme.display1,
+        ),
+      ],
     );
   }
 }

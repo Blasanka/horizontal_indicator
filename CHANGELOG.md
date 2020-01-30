@@ -1,3 +1,7 @@
+#### [0.1.0] - 22/01/2020 (January 2020)
+
+  - Parameter (`updateSelectedDay`) to change date holder if have dragging behaviour.
+
 #### [0.0.9] - 22/01/2020 (January 2020)
 
   - Parameter to disabling Jump to initial day added.

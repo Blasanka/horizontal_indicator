@@ -1,7 +1,6 @@
 library horizontal_indicator;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
 
 class _DateIndicatorInheritedWidget extends InheritedWidget {
@@ -98,6 +97,10 @@ class _DateIndicatorInheritedWidget extends InheritedWidget {
 /// to show active bubbles provide *day of month* as a `int` `List`. Ex: If January `[1,2,31]`, depending on the month end day have to be correct.
 ///
 /// @param [`onHolderTap`]: is a function with an integer parameter to for you to access day selected value. ```(int i) => setState(() => yourVar = i)```,
+///
+/// @param [`updateSelectedDay`]: If not null, will change the holder selection to that day(should be between month days. Ex: 1-31).
+///
+/// Check this example: https://github.com/Blasanka/horizontal_indicator/blob/master/example/lib/main.dart
 class DateIndicator extends StatefulWidget {
   final Color holderColor;
   final Color activeBubbleColor;
@@ -121,6 +124,7 @@ class DateIndicator extends StatefulWidget {
   final bool jumpToInitialDay;
   final List<int> activeHolders;
   final ValueChanged<int> onHolderTap;
+  final int updateSelectedDay;
 
   const DateIndicator({
     this.holderColor,
@@ -145,6 +149,7 @@ class DateIndicator extends StatefulWidget {
     this.jumpToInitialDay = true,
     this.activeHolders,
     this.onHolderTap,
+    this.updateSelectedDay,
   });
 
   static _DateIndicatorInheritedWidget of(BuildContext context) =>
@@ -175,6 +180,23 @@ class _DateIndicatorState extends State<DateIndicator> {
     });
   }
 
+  void updateDaySelection(int day, String type) {
+    if (day != null) {
+      setSelectedDay(day);
+      toggleDateHolderActive(true);
+
+      if (widget.jumpToInitialDay) {
+        setState(() {
+          if (type == "initial") if (day > 6)
+            dateIndicatorController.jumpTo(40.0 * day);
+          else if (day <= 1)
+            dateIndicatorController.jumpTo(0);
+          else if (day > 1) dateIndicatorController.jumpTo(20.0 * day);
+        });
+      }
+    }
+  }
+
   @override
   void initState() {
     dateIndicatorController = ScrollController();
@@ -182,24 +204,19 @@ class _DateIndicatorState extends State<DateIndicator> {
     final DateTime dateForValues = new DateTime(date.year, date.month + 1, 0);
     monthDateCount = dateForValues.day;
 
-    if (widget.initialDay != null) {
-      setSelectedDay(widget.initialDay);
-      toggleDateHolderActive(true);
-
-      if (widget.jumpToInitialDay) {
-        SchedulerBinding.instance.addPostFrameCallback((_) {
-          setState(() {
-            if (widget.initialDay > 6)
-              dateIndicatorController.jumpTo(40.0 * widget.initialDay);
-          });
-        });
-      }
-    }
     super.initState();
   }
 
   @override
+  void didUpdateWidget(DateIndicator oldWidget) {
+    updateDaySelection(widget.initialDay, "initial");
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    updateDaySelection(widget.updateSelectedDay, "update");
+
     return Container(
       width: widget.indicatorWidth ?? MediaQuery.of(context).size.width,
       height: widget.hideDayOfWeek
